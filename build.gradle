@@ -6,7 +6,7 @@ buildscript {
     repositories {
         mavenLocal()
         maven { url "https://mirrors.tencent.com/nexus/repository/maven-public/" }
-        maven { url "https://mirrors.tencent.com/repository/maven/thirdparty-snapshots/"}
+//        maven { url "https://mirrors.tencent.com/repository/maven/thirdparty-snapshots/"}
     }
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
@@ -29,7 +29,7 @@ targetCompatibility = 1.11
 repositories {
     mavenLocal()
     maven { url "https://mirrors.tencent.com/nexus/repository/maven-public/" }
-    maven { url "https://mirrors.tencent.com/repository/maven/thirdparty-snapshots/"}
+//    maven { url "https://mirrors.tencent.com/repository/maven/thirdparty-snapshots/"}
 }
 
 
@@ -43,11 +43,14 @@ dependencies {
     annotationProcessor("org.projectlombok:lombok:${lombokVersion}")
     testAnnotationProcessor("org.projectlombok:lombok:${lombokVersion}")
 
-    compile("com.donkeyhuang:donkey-commons:0.0.1-SNAPSHOT")
+    compile fileTree(dir: 'lib', include: [ '*.jar'])
+    compile("org.json:json:20180813")
+//    compile("com.donkeyhuang:donkey-commons:0.0.1-SNAPSHOT")
 
     compile("org.springframework.boot:spring-boot-starter-web")
     compile("org.springframework.boot:spring-boot-starter-aop")
     compile("org.springframework.boot:spring-boot-starter-validation")
+    compile("org.springframework:spring-tx:5.1.8.RELEASE")
 }
 
 //configurations {
