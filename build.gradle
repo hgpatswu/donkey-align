@@ -1,0 +1,65 @@
+buildscript {
+    ext {
+        springBootVersion = '2.1.6.RELEASE'
+        lombokVersion = '1.18.2'
+    }
+    repositories {
+        mavenLocal()
+        maven { url "https://mirrors.tencent.com/nexus/repository/maven-public/" }
+        maven { url "https://mirrors.tencent.com/repository/maven/thirdparty-snapshots/"}
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    }
+}
+
+plugins {
+    id "java"
+    id "idea"
+    id "org.springframework.boot" version "2.1.6.RELEASE"
+    id "io.spring.dependency-management" version "1.0.9.RELEASE"
+}
+
+group = 'com.tencent.transmart'
+version = '0.0.1'
+
+sourceCompatibility = 1.11
+targetCompatibility = 1.11
+
+repositories {
+    mavenLocal()
+    maven { url "https://mirrors.tencent.com/nexus/repository/maven-public/" }
+    maven { url "https://mirrors.tencent.com/repository/maven/thirdparty-snapshots/"}
+}
+
+
+ext {
+    springCloudVersion = "Greenwich.SR2"
+}
+
+dependencies {
+    compileOnly("org.projectlombok:lombok:${lombokVersion}")
+    testCompileOnly("org.projectlombok:lombok:${lombokVersion}")
+    annotationProcessor("org.projectlombok:lombok:${lombokVersion}")
+    testAnnotationProcessor("org.projectlombok:lombok:${lombokVersion}")
+
+    compile("com.donkeyhuang:donkey-commons:0.0.1-SNAPSHOT")
+
+    compile("org.springframework.boot:spring-boot-starter-web")
+    compile("org.springframework.boot:spring-boot-starter-aop")
+    compile("org.springframework.boot:spring-boot-starter-validation")
+}
+
+//configurations {
+//    all*.exclude group: 'org.slf4j', module: 'slf4j-log4j12'
+//}
+
+dependencyManagement {
+    imports {
+        mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+    }
+}
+
+springBoot {
+    mainClassName = "com.donkeyhuang.align.Application"
+}
