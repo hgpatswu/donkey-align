@@ -24,8 +24,6 @@ public class SentAlignController {
             return new RestResponse<>(HttpStatus.BAD_REQUEST.value(), "Param-Error", "Value is null");
         }
 
-
-
         return new RestResponse<>(true);
     }
 }

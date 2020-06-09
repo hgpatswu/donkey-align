@@ -17,8 +17,7 @@ public class SentAligner {
 
     @PostConstruct
     public void init() {
-
-        if (sentAlignerJNI.init()) return;
+        if (!sentAlignerJNI.init()) log.error("failed to init sent aligner");
     }
 
     public SentAlignResponse alignSent(SentAlignRequest request) {
