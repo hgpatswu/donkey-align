@@ -1,5 +1,7 @@
 package com.donkeyhuang.align.sentAlign.manager;
 
+import com.donkeyhuang.align.sentAlign.entity.SentAlignLoadConf;
+
 import java.util.List;
 
 public class SentAlignerJNI {
@@ -8,6 +10,7 @@ public class SentAlignerJNI {
         System.loadLibrary("donkeyalign");
     }
 
-    public native boolean init();
+    public native boolean init(Object conf);
+
     public native Object alignSent(Object request);
 }

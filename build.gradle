@@ -41,6 +41,7 @@ dependencies {
     compileOnly("org.projectlombok:lombok:${lombokVersion}")
     testCompileOnly("org.projectlombok:lombok:${lombokVersion}")
     annotationProcessor("org.projectlombok:lombok:${lombokVersion}")
+    annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
     testAnnotationProcessor("org.projectlombok:lombok:${lombokVersion}")
 
     compile fileTree(dir: 'lib', include: [ '*.jar'])
