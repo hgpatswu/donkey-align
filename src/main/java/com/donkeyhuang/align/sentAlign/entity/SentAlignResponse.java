@@ -1,15 +1,29 @@
 package com.donkeyhuang.align.sentAlign.entity;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.experimental.Accessors;
-
+import java.util.ArrayList;
 import java.util.List;
 
-@Data
-@Accessors(chain = true)
-@NoArgsConstructor
 public class SentAlignResponse {
 
-    private List<SentAlignPair> sentPairList;
+    private List<AlignedSentPair> sentPairList;
+
+    public SentAlignResponse() {
+        sentPairList = new ArrayList<>();
+    }
+
+    public SentAlignResponse(List<AlignedSentPair> sentPairList) {
+        this.sentPairList = sentPairList;
+    }
+
+    public void addSentPair(AlignedSentPair pair) {
+        sentPairList.add(pair);
+    }
+
+    public List<AlignedSentPair> getSentPairList() {
+        return sentPairList;
+    }
+
+    public void setSentPairList(List<AlignedSentPair> sentPairList) {
+        this.sentPairList = sentPairList;
+    }
 }

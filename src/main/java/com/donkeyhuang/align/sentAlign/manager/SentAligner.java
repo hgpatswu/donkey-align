@@ -3,12 +3,11 @@ package com.donkeyhuang.align.sentAlign.manager;
 import com.donkeyhuang.align.sentAlign.entity.SentAlignRequest;
 import com.donkeyhuang.align.sentAlign.entity.SentAlignResponse;
 import lombok.NoArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
+import java.util.ArrayList;
 
-@Slf4j
 @Component
 @NoArgsConstructor
 public class SentAligner {
@@ -17,10 +16,15 @@ public class SentAligner {
 
     @PostConstruct
     public void init() {
-        if (!sentAlignerJNI.init()) log.error("failed to init sent aligner");
+        if (!sentAlignerJNI.init()) {
+            System.out.println("failed to init sent aligner");
+            return;
+        }
+
+        System.out.println("success to init sent aligner");
     }
 
-    public SentAlignResponse alignSent(SentAlignRequest request) {
-        return null;
+    public SentAlignResponse alignSent(Object request) {
+        return (SentAlignResponse) sentAlignerJNI.alignSent(request);
     }
 }

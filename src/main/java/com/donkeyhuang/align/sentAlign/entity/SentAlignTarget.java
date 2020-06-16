@@ -7,12 +7,29 @@ import lombok.experimental.Accessors;
 
 import java.util.List;
 
-@Data
-@Accessors(chain = true)
-@NoArgsConstructor
 public class SentAlignTarget {
 
     private Language lang;
 
     private List<String> sentList;
+
+    public SentAlignTarget() {
+
+    }
+
+    public Language getLang() {
+        return lang;
+    }
+
+    public void setLang(Language lang) {
+        this.lang = lang;
+    }
+
+    public List<String> getSentList() {
+        return sentList;
+    }
+
+    public void setSentList(List<String> sentList) {
+        this.sentList = sentList;
+    }
 }

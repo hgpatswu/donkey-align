@@ -1,9 +1,11 @@
 package com.donkeyhuang.align.sentAlign.manager;
 
+import java.util.List;
+
 public class SentAlignerJNI {
 
     static {
-        System.loadLibrary("sentalign");
+        System.loadLibrary("donkeyalign");
     }
 
     public native boolean init();
