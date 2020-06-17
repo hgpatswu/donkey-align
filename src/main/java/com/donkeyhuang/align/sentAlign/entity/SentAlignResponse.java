@@ -26,4 +26,11 @@ public class SentAlignResponse {
     public void setSentPairList(List<AlignedSentPair> sentPairList) {
         this.sentPairList = sentPairList;
     }
+
+    @Override
+    public String toString() {
+        return "SentAlignResponse{" +
+                "sentPairList=" + sentPairList +
+                '}';
+    }
 }

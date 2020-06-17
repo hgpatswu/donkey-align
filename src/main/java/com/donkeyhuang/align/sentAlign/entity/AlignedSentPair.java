@@ -95,4 +95,15 @@ public class AlignedSentPair {
                 break;
         }
     }
+
+    @Override
+    public String toString() {
+        return "AlignedSentPair{" +
+                "sourceSentList=" + sourceSentList +
+                ", targetSentList=" + targetSentList +
+                ", score=" + score +
+                ", scoreList=" + scoreList +
+                ", level=" + level +
+                '}';
+    }
 }

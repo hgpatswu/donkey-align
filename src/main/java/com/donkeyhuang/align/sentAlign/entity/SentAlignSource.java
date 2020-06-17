@@ -29,4 +29,12 @@ public class SentAlignSource {
     public void setSentList(List<String> sentList) {
         this.sentList = sentList;
     }
+
+    @Override
+    public String toString() {
+        return "SentAlignSource{" +
+                "lang=" + lang +
+                ", sentList=" + sentList +
+                '}';
+    }
 }

@@ -47,4 +47,14 @@ public class SentAlignRequest {
     public void setTermList(List<SentAlignTerm> termList) {
         this.termList = termList;
     }
+
+    @Override
+    public String toString() {
+        return "SentAlignRequest{" +
+                "source=" + source +
+                ", target=" + target +
+                ", inorder=" + inorder +
+                ", termList=" + termList +
+                '}';
+    }
 }

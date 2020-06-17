@@ -32,4 +32,12 @@ public class SentAlignTarget {
     public void setSentList(List<String> sentList) {
         this.sentList = sentList;
     }
+
+    @Override
+    public String toString() {
+        return "SentAlignTarget{" +
+                "lang=" + lang +
+                ", sentList=" + sentList +
+                '}';
+    }
 }
