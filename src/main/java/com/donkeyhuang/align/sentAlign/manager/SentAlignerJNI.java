@@ -13,4 +13,8 @@ public class SentAlignerJNI {
     public native boolean init(Object conf);
 
     public native Object alignSent(Object request);
+
+//    public native Object alignWord(Object request);
+//
+//    public native String tokenSent(String sent);
 }
