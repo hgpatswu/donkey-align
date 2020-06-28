@@ -16,6 +16,8 @@ public class SentAlignConfigProperties {
 
     private String phraseTablePath;
 
+    private String svmModelPath;
+
     public SentAlignConfigProperties() {
     }
 
@@ -57,5 +59,13 @@ public class SentAlignConfigProperties {
 
     public void setPhraseTablePath(String phraseTablePath) {
         this.phraseTablePath = phraseTablePath;
+    }
+
+    public String getSvmModelPath() {
+        return svmModelPath;
+    }
+
+    public void setSvmModelPath(String svmModelPath) {
+        this.svmModelPath = svmModelPath;
     }
 }

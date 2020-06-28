@@ -11,7 +11,7 @@ public class WordAlignResponse {
 
     private List<Double> scoreList;
 
-    private String align;
+    private List<List<Integer>> align;
 
     public WordAlignResponse() {
         srcSentTokens = new ArrayList<>();
@@ -55,12 +55,17 @@ public class WordAlignResponse {
         this.scoreList = scoreList;
     }
 
-    public String getAlign() {
+    public List<List<Integer>> getAlign() {
         return align;
     }
 
-    public void setAlign(String align) {
+    public void setAlign(List<List<Integer>> align) {
         this.align = align;
+    }
+
+    public void addAlign(int index, boolean append) {
+        if (append) align.add(new ArrayList<>());
+        align.get(align.size()-1).add(index);
     }
 
     @Override

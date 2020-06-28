@@ -29,7 +29,7 @@ public class SentAlignController {
 
     @RequestMapping(value = "align/sent", method = RequestMethod.POST)
     @ResponseBody
-    public RestResponse<SentAlignResponse> callApiImt(@Validated @RequestBody RestRequest<SentAlignRequest> param) {
+    public RestResponse<SentAlignResponse> alignSent(@Validated @RequestBody RestRequest<SentAlignRequest> param) {
         var request = param.getValue();
         if (request == null) {
             return new RestResponse<>(HttpStatus.BAD_REQUEST.value(), "Param-Error", "Value is null");
@@ -37,7 +37,6 @@ public class SentAlignController {
 
         LOG.info(request.toString());
         var response = sentAligner.alignSent(request);
-        if (response == null) response = new SentAlignResponse();
 
         return new RestResponse<>(response);
     }
