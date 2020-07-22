@@ -1,9 +1,6 @@
 package com.donkeyhuang.align.sentAlign.manager;
 
-import com.donkeyhuang.align.sentAlign.entity.SentAlignRequest;
-import com.donkeyhuang.align.sentAlign.entity.SentAlignResponse;
-import com.donkeyhuang.align.sentAlign.entity.WordAlignRequest;
-import com.donkeyhuang.align.sentAlign.entity.WordAlignResponse;
+import com.donkeyhuang.align.sentAlign.entity.*;
 import com.donkeyhuang.commons.util.CollectionUtil;
 import lombok.NoArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
@@ -34,24 +31,6 @@ public class SentAligner {
         return ret == null ? nullRet : ret;
     }
 
-    protected void filterSentList(List<String> sentList) {
-        for (int i = 0; i < sentList.size();) {
-            var sent = sentList.get(i);
-            sent = sent.replaceAll("\n", " ");
-            sent = sent.replaceAll("\t", " ");
-            sent = StringUtils.trim(sent);
-
-            if (StringUtils.isEmpty(sent)) {
-                sentList.remove(i);
-                continue;
-            }
-
-            sentList.remove(i);
-            sentList.add(i, sent);
-            i++;
-        }
-    }
-
     public WordAlignResponse alignWord(WordAlignRequest request) {
         WordAlignResponse nullRet = new WordAlignResponse();
         if (request == null) return nullRet;
@@ -64,14 +43,44 @@ public class SentAligner {
         return ret == null ? nullRet : ret;
     }
 
+    public SentTokenResponse tokenSent(SentTokenRequest request) {
+        SentTokenResponse nullRet = new SentTokenResponse();
+        if (request == null) return nullRet;
+
+        request.setSent(filterSent(request.getSent()));
+        filterSentList(request.getSentList());
+        if (request.getSentList() != null && request.getSentList().isEmpty()) request.setSentList(null);
+
+        if (request.getSent() == null && request.getSentList() == null) return nullRet;
+
+        var ret = (SentTokenResponse) sentAlignerJNI.tokenSent(request);
+        return ret == null ? nullRet : ret;
+    }
+
+    protected void filterSentList(List<String> sentList) {
+        if (sentList == null) return;
+
+        for (int i = 0; i < sentList.size();) {
+            var sent = filterSent(sentList.get(i));
+
+            if (StringUtils.isEmpty(sent)) {
+                sentList.remove(i);
+                continue;
+            }
+
+            sentList.set(i, sent);
+            i++;
+        }
+    }
+
     protected String filterSent(String sent) {
+        if (sent == null) return null;
+
         sent = sent.replaceAll("\n", " ");
         sent = sent.replaceAll("\t", " ");
         sent = StringUtils.trim(sent);
 
-        if (StringUtils.isEmpty(sent)) {
-            return null;
-        }
+        if (StringUtils.isEmpty(sent)) return null;
 
         return sent;
     }

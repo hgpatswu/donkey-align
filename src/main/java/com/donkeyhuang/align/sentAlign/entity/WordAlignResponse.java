@@ -17,6 +17,7 @@ public class WordAlignResponse {
         srcSentTokens = new ArrayList<>();
         tgtSentTokens = new ArrayList<>();
         scoreList = new ArrayList<>();
+        align = new ArrayList<>();
     }
 
     public List<String> getSrcSentTokens() {
@@ -63,9 +64,12 @@ public class WordAlignResponse {
         this.align = align;
     }
 
-    public void addAlign(int index, boolean append) {
-        if (append) align.add(new ArrayList<>());
+    public void addAlign(int index) {
         align.get(align.size()-1).add(index);
+    }
+
+    public void appendAlign() {
+        align.add(new ArrayList<>());
     }
 
     @Override
