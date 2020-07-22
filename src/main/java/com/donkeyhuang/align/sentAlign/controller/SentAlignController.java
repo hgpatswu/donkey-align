@@ -37,6 +37,8 @@ public class SentAlignController {
 
         LOG.info(request.toString());
         var response = sentAligner.alignSent(request);
+        if (response != null) LOG.info(response.toString()); else LOG.info("response is null");
+
 
         return new RestResponse<>(response);
     }
