@@ -42,6 +42,64 @@ public class SentAlignController {
         return new RestResponse<>(response);
     }
 
+    @RequestMapping(value = "align/sent/async", method = RequestMethod.POST)
+    @ResponseBody
+    public RestResponse<String> alignSentAsync(@Validated @RequestBody RestRequest<SentAlignRequest> param) {
+        var request = param.getValue();
+        if (request == null) {
+            return new RestResponse<>(HttpStatus.BAD_REQUEST.value(), "Param-Error", "Value is null");
+        }
+
+        LOG.info(request.toString());
+        var response = sentAligner.alignSentAsync(request);
+        if (response != null) LOG.info("taskId: {}", response); else LOG.info("taskId is null");
+
+
+        return new RestResponse<>(response);
+    }
+
+    @RequestMapping(value = "align/sent/async/check", method = RequestMethod.POST)
+    @ResponseBody
+    public RestResponse<Boolean> checkAlignSentTask(@Validated @RequestBody RestRequest<String> param) {
+        var taskId = param.getValue();
+        if (taskId == null) {
+            return new RestResponse<>(HttpStatus.BAD_REQUEST.value(), "Param-Error", "Value is null");
+        }
+
+        var response = sentAligner.checkAlignSentTask(taskId);
+        if (response != null) LOG.info("taskId: {}, check: {}", taskId, response); else LOG.info("failed to check task id: {}", taskId);
+
+        return new RestResponse<>(response);
+    }
+
+    @RequestMapping(value = "align/sent/async/delete", method = RequestMethod.POST)
+    @ResponseBody
+    public RestResponse<Boolean> deleteAlignSentTask(@Validated @RequestBody RestRequest<String> param) {
+        var taskId = param.getValue();
+        if (taskId == null) {
+            return new RestResponse<>(HttpStatus.BAD_REQUEST.value(), "Param-Error", "Value is null");
+        }
+
+        var response = sentAligner.deleteAlignSentResult(taskId);
+        if (response != null) LOG.info("taskId: {}, delete: {}", taskId, response); else LOG.info("failed to delete task id: {}", taskId);
+
+        return new RestResponse<>(response);
+    }
+
+    @RequestMapping(value = "align/sent/async/load", method = RequestMethod.POST)
+    @ResponseBody
+    public RestResponse<SentAlignResponse> loadAlignSentTask(@Validated @RequestBody RestRequest<String> param) {
+        var taskId = param.getValue();
+        if (taskId == null) {
+            return new RestResponse<>(HttpStatus.BAD_REQUEST.value(), "Param-Error", "Value is null");
+        }
+
+        var response = sentAligner.loadAlignSentResult(taskId);
+        if (response != null) LOG.info(response.toString()); else LOG.info("response is null");
+
+        return new RestResponse<>(response);
+    }
+
     @RequestMapping(value = "align/word", method = RequestMethod.POST)
     @ResponseBody
     public RestResponse<WordAlignResponse> alignWord(@Validated @RequestBody RestRequest<WordAlignRequest> param) {

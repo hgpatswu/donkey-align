@@ -31,6 +31,44 @@ public class SentAligner {
         return ret == null ? nullRet : ret;
     }
 
+    public String alignSentAsync(SentAlignRequest request) {
+        SentAlignResponse nullRet = new SentAlignResponse();
+        if (request == null) return null;
+
+        filterSentList(request.getSource().getSentList());
+        filterSentList(request.getTarget().getSentList());
+
+        if (request.getSource() == null || request.getSource().getSentList() == null || request.getSource().getSentList().isEmpty() ||
+                request.getTarget() == null || request.getTarget().getSentList() == null || request.getTarget().getSentList().isEmpty())
+            return null;
+
+        return sentAlignerJNI.alignSentAsync(request);
+    }
+
+    public Boolean checkAlignSentTask(String taskId) {
+        taskId = StringUtils.trim(taskId);
+        if (StringUtils.isEmpty(taskId)) return null;
+
+        return sentAlignerJNI.checkAlignSentTask(taskId);
+    }
+
+    public Boolean deleteAlignSentResult(String taskId) {
+        taskId = StringUtils.trim(taskId);
+        if (StringUtils.isEmpty(taskId)) return null;
+
+        return sentAlignerJNI.deleteAlignSentResult(taskId);
+    }
+
+    public SentAlignResponse loadAlignSentResult(String taskId) {
+        SentAlignResponse nullRet = new SentAlignResponse();
+        taskId = StringUtils.trim(taskId);
+        if (StringUtils.isEmpty(taskId)) return nullRet;
+
+        var ret = (SentAlignResponse) sentAlignerJNI.loadAlignSentResult(taskId);
+        return ret == null ? nullRet : ret;
+    }
+
+
     public WordAlignResponse alignWord(WordAlignRequest request) {
         WordAlignResponse nullRet = new WordAlignResponse();
         if (request == null) return nullRet;

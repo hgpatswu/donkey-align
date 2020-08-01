@@ -17,4 +17,12 @@ public class SentAlignerJNI {
     public native Object alignWord(Object request);
 
     public native Object tokenSent(Object request);
+
+    public native String alignSentAsync(Object request);
+
+    public native boolean checkAlignSentTask(String taskId);
+
+    public native boolean deleteAlignSentResult(String taskId);
+
+    public native Object loadAlignSentResult(String taskId);
 }
