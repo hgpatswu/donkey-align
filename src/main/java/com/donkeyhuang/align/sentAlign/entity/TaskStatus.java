@@ -2,6 +2,8 @@ package com.donkeyhuang.align.sentAlign.entity;
 
 public class TaskStatus {
 
+    private String taskId;
+
     private Boolean finished;
 
     private Boolean error;
@@ -16,6 +18,14 @@ public class TaskStatus {
 
     public TaskStatus() {
 
+    }
+
+    public String getTaskId() {
+        return taskId;
+    }
+
+    public void setTaskId(String taskId) {
+        this.taskId = taskId;
     }
 
     public Boolean getFinished() {
@@ -69,9 +79,10 @@ public class TaskStatus {
     @Override
     public String toString() {
         return "TaskStatus{" +
-                "finished=" + finished +
+                "taskId='" + taskId + '\'' +
+                ", finished=" + finished +
                 ", error=" + error +
-                ", Canceled=" + canceled +
+                ", canceled=" + canceled +
                 ", stage='" + stage + '\'' +
                 ", message='" + message + '\'' +
                 ", percent=" + percent +

@@ -7,6 +7,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Component
@@ -57,6 +58,14 @@ public class SentAligner {
         ret.setFinished(false);
         ret.setMessage("not exist");
         return ret;
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<TaskStatus> listAlignSentTask() {
+        var ret = (List<TaskStatus>) sentAlignerJNI.listAlignSentTask();
+        if (ret != null) return ret;
+
+        return new ArrayList<>();
     }
 
     public Boolean deleteAlignSentResult(String taskId) {

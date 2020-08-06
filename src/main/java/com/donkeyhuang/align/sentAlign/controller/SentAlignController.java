@@ -14,6 +14,8 @@ import org.springframework.http.MediaType;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @NoArgsConstructor
 @RequestMapping(method = RequestMethod.POST,
@@ -68,6 +70,15 @@ public class SentAlignController {
 
         var response = sentAligner.checkAlignSentTask(taskId);
         if (response != null) LOG.info("taskId: {}, check: {}", taskId, response); else LOG.info("failed to check task id: {}", taskId);
+
+        return new RestResponse<>(response);
+    }
+
+    @RequestMapping(value = "align/sent/async/list", method = RequestMethod.POST)
+    @ResponseBody
+    public RestResponse<List<TaskStatus>> listAlignSentTask(@Validated @RequestBody RestRequest<String> param) {
+        var response = sentAligner.listAlignSentTask();
+        if (response != null) LOG.info("list: {}", response); else LOG.info("failed to list task id");
 
         return new RestResponse<>(response);
     }

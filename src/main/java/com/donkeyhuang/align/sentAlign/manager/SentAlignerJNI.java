@@ -22,6 +22,8 @@ public class SentAlignerJNI {
 
     public native Object checkAlignSentTask(String taskId);
 
+    public native Object listAlignSentTask();
+
     public native boolean deleteAlignSentResult(String taskId);
 
     public native Object loadAlignSentResult(String taskId);
