@@ -60,7 +60,7 @@ public class SentAlignController {
 
     @RequestMapping(value = "align/sent/async/check", method = RequestMethod.POST)
     @ResponseBody
-    public RestResponse<Boolean> checkAlignSentTask(@Validated @RequestBody RestRequest<String> param) {
+    public RestResponse<TaskStatus> checkAlignSentTask(@Validated @RequestBody RestRequest<String> param) {
         var taskId = param.getValue();
         if (taskId == null) {
             return new RestResponse<>(HttpStatus.BAD_REQUEST.value(), "Param-Error", "Value is null");

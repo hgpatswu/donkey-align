@@ -45,11 +45,17 @@ public class SentAligner {
         return sentAlignerJNI.alignSentAsync(request);
     }
 
-    public Boolean checkAlignSentTask(String taskId) {
+    public TaskStatus checkAlignSentTask(String taskId) {
         taskId = StringUtils.trim(taskId);
         if (StringUtils.isEmpty(taskId)) return null;
 
-        return sentAlignerJNI.checkAlignSentTask(taskId);
+        var ret = (TaskStatus) sentAlignerJNI.checkAlignSentTask(taskId);
+        if (ret != null) return ret;
+
+        ret = new TaskStatus();
+        ret.setError(true);
+        ret.setMessage("not exist");
+        return ret;
     }
 
     public Boolean deleteAlignSentResult(String taskId) {
