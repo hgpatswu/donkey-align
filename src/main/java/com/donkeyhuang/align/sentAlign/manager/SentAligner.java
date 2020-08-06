@@ -54,6 +54,7 @@ public class SentAligner {
 
         ret = new TaskStatus();
         ret.setError(true);
+        ret.setFinished(false);
         ret.setMessage("not exist");
         return ret;
     }
