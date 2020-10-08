@@ -6,7 +6,6 @@ buildscript {
     repositories {
         mavenLocal()
         maven { url "https://mirrors.tencent.com/nexus/repository/maven-public/" }
-//        maven { url "https://mirrors.tencent.com/repository/maven/thirdparty-snapshots/"}
     }
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
@@ -15,9 +14,11 @@ buildscript {
 
 plugins {
     id "java"
+    id "java-library"
     id "idea"
     id "org.springframework.boot" version "2.1.6.RELEASE"
     id "io.spring.dependency-management" version "1.0.9.RELEASE"
+    id "com.palantir.docker" version "0.25.0"
 }
 
 group = 'com.tencent.transmart'
@@ -29,7 +30,6 @@ targetCompatibility = 1.11
 repositories {
     mavenLocal()
     maven { url "https://mirrors.tencent.com/nexus/repository/maven-public/" }
-//    maven { url "https://mirrors.tencent.com/repository/maven/thirdparty-snapshots/"}
 }
 
 
@@ -44,6 +44,10 @@ dependencies {
     annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
     testAnnotationProcessor("org.projectlombok:lombok:${lombokVersion}")
 
+    testCompile("org.junit.platform:junit-platform-launcher:1.2.0")
+    testCompile("org.junit.jupiter:junit-jupiter-engine:5.2.0")
+    testCompile("org.junit.vintage:junit-vintage-engine:5.2.0")
+
     compile fileTree(dir: 'lib', include: [ '*.jar'])
     compile("org.json:json:20180813")
 //    compile("com.donkeyhuang:donkey-commons:0.0.1-SNAPSHOT")
@@ -54,6 +58,7 @@ dependencies {
     compile("org.springframework:spring-tx:5.1.8.RELEASE")
     compile("org.apache.commons:commons-lang3:3.10")
     compile("org.springframework.boot:spring-boot-starter-logging")
+//    compile("org.springframework.boot:spring-boot-starter-test")
 }
 
 //configurations {
@@ -68,4 +73,12 @@ dependencyManagement {
 
 springBoot {
     mainClassName = "com.donkeyhuang.align.Application"
+}
+
+docker {
+    dependsOn(bootJar)
+    name "donkeyhuang.tpddns.cn:5000/fast-align-java:1.0"
+    dockerfile file("Dockerfile")
+    files bootJar.archivePath
+    buildArgs("JAR_FILE": "${bootJar.archiveName}")
 }

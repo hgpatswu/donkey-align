@@ -1,6 +1,5 @@
 package com.donkeyhuang.align.sentAlign.config;
 
-import com.donkeyhuang.align.sentAlign.entity.SentAlignLoadConf;
 import com.donkeyhuang.align.sentAlign.manager.SentAlignerJNI;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;

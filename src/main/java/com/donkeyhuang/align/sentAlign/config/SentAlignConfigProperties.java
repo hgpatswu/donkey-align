@@ -1,6 +1,5 @@
 package com.donkeyhuang.align.sentAlign.config;
 
-import lombok.NoArgsConstructor;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 @ConfigurationProperties(prefix = "sent.align")
@@ -17,6 +16,8 @@ public class SentAlignConfigProperties {
     private String phraseTablePath;
 
     private String svmModelPath;
+
+    private Integer threadNum;
 
     public SentAlignConfigProperties() {
     }
@@ -67,5 +68,13 @@ public class SentAlignConfigProperties {
 
     public void setSvmModelPath(String svmModelPath) {
         this.svmModelPath = svmModelPath;
+    }
+
+    public Integer getThreadNum() {
+        return threadNum;
+    }
+
+    public void setThreadNum(Integer threadNum) {
+        this.threadNum = threadNum;
     }
 }

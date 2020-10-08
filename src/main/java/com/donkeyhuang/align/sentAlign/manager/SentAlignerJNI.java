@@ -1,9 +1,5 @@
 package com.donkeyhuang.align.sentAlign.manager;
 
-import com.donkeyhuang.align.sentAlign.entity.SentAlignLoadConf;
-
-import java.util.List;
-
 public class SentAlignerJNI {
 
     static {
