@@ -10,6 +10,8 @@ public class SentAlignRequest {
 
     private Boolean inorder;
 
+    private Boolean fullAlign;
+
     private List<SentAlignTerm> termList;
 
     public SentAlignRequest() {
@@ -38,6 +40,14 @@ public class SentAlignRequest {
 
     public void setInorder(Boolean inorder) {
         this.inorder = inorder;
+    }
+
+    public Boolean getFullAlign() {
+        return fullAlign;
+    }
+
+    public void setFullAlign(Boolean fullAlign) {
+        this.fullAlign = fullAlign;
     }
 
     public List<SentAlignTerm> getTermList() {
