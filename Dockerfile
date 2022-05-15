@@ -1,4 +1,4 @@
-FROM donkeyhuang.tpddns.cn:5000/fast-align:1.0
+FROM donkeyhuang.tpddns.cn:5000/fast-align:2.0
 
 USER root
 WORKDIR /app

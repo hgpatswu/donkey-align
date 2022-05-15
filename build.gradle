@@ -77,7 +77,7 @@ springBoot {
 
 docker {
     dependsOn(bootJar)
-    name "donkeyhuang.tpddns.cn:5000/fast-align-java:1.0"
+    name "donkeyhuang.tpddns.cn:5000/fast-align-java:2.0"
     dockerfile file("Dockerfile")
     files bootJar.archivePath
     buildArgs("JAR_FILE": "${bootJar.archiveName}")
